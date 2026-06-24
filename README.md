@@ -46,7 +46,7 @@ All intermediate files are stored in a temporary directory that is cleaned up au
 - **Linux/macOS** with standard utilities (`zcat`, `grep`, `sed`, `head`, `wc`, `mktemp`)
 - **[jq](https://jqlang.github.io/jq/)** - JSON processor
 - **[llm](https://llm.datasette.io/)** -  CLI tool for interacting with LLMs
-- **Goodreads dataset** - expected at `/data-fast/goodreads/`
+- **Goodreads dataset** - expected at `/data-fast/goodreads/`. Compiled by Mengting Wan and Julian McAuley and is documented at mengtingwan.github.io/data/goodreads.html. 
 
 ## Usage
 
@@ -101,4 +101,10 @@ REVIEWS_FILE="/path/to/goodreads_reviews_dedup.json.gz"
 ```
 
 To change the number of reviews sent to the LLM, modify the `head -n20` in step 4.
+
+
+## Acknowledgments
+
+This project was developed as part of the **Big Data** course taught by [Professor Mike Izbicki](https://github.com/mikeizbicki) at Claremont McKenna College. 
+
 
