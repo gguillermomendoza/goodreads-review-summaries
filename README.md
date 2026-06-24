@@ -2,7 +2,7 @@
 
 A command-line tool that generates AI-powered summaries of book reviews from the [Goodreads dataset](https://mengtingwan.github.io/data/goodreads.html) (2006–2017). Inspired by [Amazon's AI review summaries](https://www.aboutamazon.com/news/amazon-ai/amazon-improves-customer-reviews-with-generative-ai).
 
-This is a lightweight example of **Retrieval Augmented Generation (RAG)** — extracting relevant data from a large corpus and passing it to an LLM for summarization — implemented entirely in shell.
+This is a lightweight example of **Retrieval Augmented Generation (RAG)** - extracting relevant data from a large corpus and passing it to an LLM for summarization — implemented entirely in shell.
 
 ## Dataset
 
@@ -18,35 +18,35 @@ Both files are in [JSON Lines](https://jsonlines.org/) format (one JSON object p
 ## How It Works
 
 ```
-┌──────────────────┐     grep       ┌───────────────┐
-│ goodreads_books  │ ──────────────▶│ matching books │
-│    .json.gz      │  title prefix  │   (book_ids)  │
-└──────────────────┘                └───────┬───────┘
+┌──────────────────┐     grep        ┌───────────────┐
+│ goodreads_books  │ ──────────────▶ │matching books │
+│    .json.gz      │  title prefix   │   (book_ids)  │
+└──────────────────┘                 └───────┬───────┘
                                             │
                                             │ build regex
                                             ▼
 ┌──────────────────┐    grep -E     ┌───────────────┐    head -n20    ┌─────┐
-│goodreads_reviews │ ──────────────▶│   matching    │ ──────────────▶│ LLM │
-│   _dedup.json.gz │  book_id regex │   reviews     │   + jq         │     │
-└──────────────────┘                └───────────────┘                └──┬──┘
-                                                                       │
-                                                                       ▼
-                                                                   Summary
+│goodreads_reviews │ ──────────────▶│   matching    │ ──────────────▶ │ LLM │
+│   _dedup.json.gz │  book_id regex │   reviews     │   + jq          │     │
+└──────────────────┘                └───────────────┘                 └──┬──┘
+                                                                         │
+                                                                         ▼
+                                                                      Summary
 ```
 
-1. **Find books** — Prefix-matches the given title in `goodreads_books.json.gz` to find all editions (hardcover, paperback, audio, etc.)
-2. **Extract IDs** — Pulls all `book_id` values and builds a regex with alternation (`|`)
-3. **Find reviews** — Searches `goodreads_reviews_dedup.json.gz` for reviews matching any of those `book_id`s
-4. **Summarize** — Sends 20 sampled reviews to an LLM for a 2–3 sentence summary
+1. **Find books** : Prefix-matches the given title in `goodreads_books.json.gz` to find all editions (hardcover, paperback, audio, etc.)
+2. **Extract IDs**: Pulls all `book_id` values and builds a regex with alternation (`|`)
+3. **Find reviews**: Searches `goodreads_reviews_dedup.json.gz` for reviews matching any of those `book_id`s
+4. **Summarize**: Sends 20 sampled reviews to an LLM for a 2–3 sentence summary
 
 All intermediate files are stored in a temporary directory that is cleaned up automatically.
 
 ## Requirements
 
 - **Linux/macOS** with standard utilities (`zcat`, `grep`, `sed`, `head`, `wc`, `mktemp`)
-- **[jq](https://jqlang.github.io/jq/)** — JSON processor
-- **[llm](https://llm.datasette.io/)** — CLI tool for interacting with LLMs
-- **Goodreads dataset** — expected at `/data-fast/goodreads/`
+- **[jq](https://jqlang.github.io/jq/)** - JSON processor
+- **[llm](https://llm.datasette.io/)** -  CLI tool for interacting with LLMs
+- **Goodreads dataset** - expected at `/data-fast/goodreads/`
 
 ## Usage
 
@@ -102,6 +102,3 @@ REVIEWS_FILE="/path/to/goodreads_reviews_dedup.json.gz"
 
 To change the number of reviews sent to the LLM, modify the `head -n20` in step 4.
 
-## License
-
-MIT
