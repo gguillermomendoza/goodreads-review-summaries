@@ -19,14 +19,14 @@ Both files are in [JSON Lines](https://jsonlines.org/) format (one JSON object p
 
 ```
 ┌──────────────────┐     grep        ┌───────────────┐
-│ goodreads_books  │ ──────────────▶ │matching books │
+│ goodreads_books  │ ──────────────▶│matching books │
 │    .json.gz      │  title prefix   │   (book_ids)  │
 └──────────────────┘                 └───────┬───────┘
                                             │
                                             │ build regex
                                             ▼
 ┌──────────────────┐    grep -E     ┌───────────────┐    head -n20    ┌─────┐
-│goodreads_reviews │ ──────────────▶│   matching    │ ──────────────▶ │ LLM │
+│goodreads_reviews │ ─────────────▶│   matching    │  ──────────────▶│ LLM │
 │   _dedup.json.gz │  book_id regex │   reviews     │   + jq          │     │
 └──────────────────┘                └───────────────┘                 └──┬──┘
                                                                          │
