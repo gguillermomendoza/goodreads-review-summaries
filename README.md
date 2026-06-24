@@ -2,7 +2,7 @@
 
 A command-line tool that generates AI-powered summaries of book reviews from the [Goodreads dataset](https://mengtingwan.github.io/data/goodreads.html) (2006–2017). Inspired by [Amazon's AI review summaries](https://www.aboutamazon.com/news/amazon-ai/amazon-improves-customer-reviews-with-generative-ai).
 
-This is a lightweight example of **Retrieval Augmented Generation (RAG)** - extracting relevant data from a large corpus and passing it to an LLM for summarization — implemented entirely in shell.
+This is a lightweight example of **Retrieval Augmented Generation (RAG)** - extracting relevant data from a large corpus and passing it to an LLM for summarization implemented in shell.
 
 ## Dataset
 
@@ -79,18 +79,6 @@ the vast majority were captivated by Kvothe's journey and immediately sought
 out the sequel.
 ```
 
-## Key Concepts
-
-| Concept | Description |
-|---------|-------------|
-| `zcat` | Decompress `.gz` files to stdout (streaming, $O(1)$ memory) |
-| `grep -E` | Filter lines matching an extended regular expression |
-| `jq '.field'` | Extract a specific field from each JSON line |
-| `sed 's/ /\|/g'` | Build alternation regex (`id1\|id2\|id3`) |
-| `$(...)` | Command substitution — embed command output in a string |
-| `$1` | First positional argument to the shell script |
-| `mktemp -d` | Create a temporary directory for intermediate files |
-
 ## Customization
 
 To change the data location, edit the variables at the top of `summarize_reviews.sh`:
@@ -106,5 +94,6 @@ To change the number of reviews sent to the LLM, modify the `head -n20` in step 
 ## Acknowledgments
 
 This project was developed as part of the **Big Data** course taught by [Professor Mike Izbicki](https://github.com/mikeizbicki) at Claremont McKenna College. 
+The dataset was compiled by Mengting Wan and Julian McAuley and is documented [here](mengtingwan.github.io/data/goodreads.html).
 
 
