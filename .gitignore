@@ -1,0 +1,15 @@
+# Intermediate data files
+*.json
+!package.json
+
+# Compressed data
+*.gz
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+*~
